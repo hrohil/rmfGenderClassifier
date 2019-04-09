@@ -3,6 +3,12 @@ import os
 from nltk.tokenize import word_tokenize
 import string
 
+"""This file is used to tokenize, stem, and remove stopwords.
+It uses the Porter Stemmer, implemented and referenced below.
+It also includes functions for tokenization and stopword removal
+"""
+
+
 """Porter Stemming Algorithm
 This is the Porter stemming algorithm, ported to Python from the
 version coded up in ANSI C by the author. It may be be regarded
