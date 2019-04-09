@@ -15,7 +15,7 @@ And the following data files:
 * Data file containing all the raw text from commentCrawler.py
     * commentCrawler.output
 * Folder of data files containing comments on each professor's RMP page parsed from parseDataIntoFiles.py without preprocessing
-    *allData
+    * allData
 * Folder of data files from allData that have been preprocessed by preprocessAllFiles.py
     * preprocessedData
 * Folder of data files of additional male professors (removed to balance the number of male and female professors)
