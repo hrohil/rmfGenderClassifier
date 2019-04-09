@@ -360,7 +360,8 @@ def main():
             tokens = word_tokenize(file)
             tokens = removeStopWords(tokens, stopwordsList)
             stemmedTokens = stemWords(tokens)
-            for item in stemmedTokens:
+            finalTokens = removeStopwords(stemmedTokens, stopwordsList)
+            for item in finalTokens:
                 item = item.lower()
                 o.write(item + " ")
 
