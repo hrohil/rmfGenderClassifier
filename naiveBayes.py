@@ -2,6 +2,8 @@ import sys
 import os
 import math
 
+female = "female"
+male = "male"
 
 def main():
 	filesFolder = sys.argv[1]
@@ -11,12 +13,14 @@ def main():
 	averageWordProbsFemale = {}
 	averageWordProbsMale= {}
 	o = open("naivebayes.output", "w")
+	# Run the training/testing on all female data files
 	for i in range(0, 146):
-		curTestFile = 'female' + str(i) + '.txt'
+		curTestFile = female + str(i) + '.txt'
 		curClassProbs = {}
 		curWordProbs = {}
 		curClassProbs, curWordProbs, totalUniqueVocab, femaleCounter, maleCounter = trainNaiveBayes(allFiles, curTestFile)
 		result = testNaiveBayes(allFiles, curTestFile, curClassProbs, curWordProbs, totalUniqueVocab, femaleCounter, maleCounter)
+		# Capture the word probability for each word to know top probabilities
 		for word in curWordProbs[0]:
 			if word in averageWordProbsFemale:
 				averageWordProbsFemale[word] += float(curWordProbs[0][word])
@@ -28,15 +32,18 @@ def main():
 			else:
 				averageWordProbsMale[word] = float(curWordProbs[1][word])
 		o.write(str(curTestFile) + " " + result + '\n')
-		if result == "female":
+		# If result is correct, add one accuracy
+		if result == female:
 			accurateResult += 1
 
+	# Run the training/testing on all male data files
 	for i in range(0, 146):
-		curTestFile = 'male' + str(i) + '.txt'
+		curTestFile = male + str(i) + '.txt'
 		curClassProbs = {}
 		curWordProbs = {}
 		curClassProbs, curWordProbs, totalUniqueVocab, femaleCounter, maleCounter = trainNaiveBayes(allFiles, curTestFile)
 		result = testNaiveBayes(allFiles, curTestFile, curClassProbs, curWordProbs, totalUniqueVocab, femaleCounter, maleCounter)
+		# Capture the word probability for each word to know top probabilities
 		for word in curWordProbs[0]:
 			if word in averageWordProbsFemale:
 				averageWordProbsFemale[word] += float(curWordProbs[0][word])
@@ -48,7 +55,8 @@ def main():
 			else:
 				averageWordProbsMale[word] = float(curWordProbs[1][word])
 		o.write(str(curTestFile) + " " + result + '\n')
-		if result == "male":
+		# If result is correct, add one accuracy
+		if result == male:
 			accurateResult += 1
 
 	#I have calculated the average top 10 words across all training sets
@@ -83,11 +91,11 @@ def trainNaiveBayes(allFiles, omitFile):
 
 	# Create class probabilities depending on the file you're omitting
 	if 'female' in omitFile:
-		classProbabilities['female'] = math.log(float(145)/float(292), 10)
-		classProbabilities['male'] = math.log(float(146)/float(292), 10)
+		classProbabilities[female] = math.log(float(145)/float(292), 10)
+		classProbabilities[male] = math.log(float(146)/float(292), 10)
 	else:
-		classProbabilities['female'] = math.log(float(146)/float(292), 10)
-		classProbabilities['male'] = math.log(float(145)/float(292), 10)
+		classProbabilities[female] = math.log(float(146)/float(292), 10)
+		classProbabilities[male] = math.log(float(145)/float(292), 10)
 
 	# Create word probabilities for each class
 	femaleWords = {}
@@ -102,7 +110,7 @@ def trainNaiveBayes(allFiles, omitFile):
 	for file in allFiles:
 		if file != omitFile:
 			currentContent = allFiles[file]
-			if 'female' in file:
+			if female in file:
 				for word in currentContent.split():
 					femaleCounter += 1
 					if word in wordProbabilities[0]:
@@ -136,26 +144,29 @@ def trainNaiveBayes(allFiles, omitFile):
 	return classProbabilities, wordProbabilities, totalUniqueVocab, femaleCounter, maleCounter
 
 def testNaiveBayes(allFiles, testFile, curClassProbs, curWordProbs, totalUniqueVocab, femaleCounter, maleCounter):
-	femaleProb = curClassProbs['female']
-	maleProb = curClassProbs['male']
-	constantNoAppearanceProbLie = math.log((float(1)/float(totalUniqueVocab + femaleCounter)), 10)
-	constantNoAppearanceProbTrue = math.log((float(1)/float(totalUniqueVocab + maleCounter)), 10)
+	# Testing naive bayes function
+	femaleProb = curClassProbs[female]
+	maleProb = curClassProbs[male]
+	# Constant probabilities if word doesn't occur in a certain category (female, male)
+	constantNoAppearanceProbFemale = math.log((float(1)/float(totalUniqueVocab + femaleCounter)), 10)
+	constantNoAppearanceProbMale = math.log((float(1)/float(totalUniqueVocab + maleCounter)), 10)
+	# Checks if the word occurs in each respective category (female, male) and adds the probability accordingly
 	for word in allFiles[testFile].split():
 		if word in curWordProbs[0]:
 			femaleProb += curWordProbs[0][word]
 		else:
-			femaleProb += constantNoAppearanceProbLie
+			femaleProb += constantNoAppearanceProbFemale
 		if word in curWordProbs[1]:
 			maleProb += curWordProbs[1][word]
 		else:
-			maleProb += constantNoAppearanceProbTrue
+			maleProb += constantNoAppearanceProbMale
 	if femaleProb > maleProb:
-		return "female"
+		return female
 	else:
-		return "male"
+		return male
 
 def find10TopWords(curWordProbs):
-	#print curWordProbs
+	# Get the top 10 probabilities of words by category
 	counter = 0
 	for key in sorted(curWordProbs, key=curWordProbs.get, reverse=True):
 		if counter < 10:
