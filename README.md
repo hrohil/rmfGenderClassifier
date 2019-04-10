@@ -1,6 +1,7 @@
 # Rate My Professor Gender Classifier 
 
-This project looks to explore how the writing and wording of comments (with pronouns removed) on ratemyprofessor.com (RMP) can be used to determine the professor's gender. This project consists of the following programs: 
+This project looks to explore how the writing and wording of comments (with pronouns removed) on ratemyprofessor.com (RMP) can be used to determine the professor's gender. This project consists of the following programs and data files:
+### Programs for acquiring data, processing, and classification ###
 * a webcrawler that crawls RMP pages for 21 universities and outputs to one file
     * commentCrawler.py
 * a text-parser that converts the raw data file into data files of comments for individual professors
@@ -11,7 +12,7 @@ This project looks to explore how the writing and wording of comments (with pron
 * a program used to predict the gender of professors using Naive Bayes. Uses the 'leave one out' strategy, and trains on the remaining preprocessed data files
     * naiveBayes.py
     
-And the following data files:
+### Data and Output Files ###
 * Data file containing all the raw text from commentCrawler.py
     * commentCrawler.output
 * Folder of data files containing comments on each professor's RMP page parsed from parseDataIntoFiles.py without preprocessing
