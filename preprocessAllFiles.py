@@ -3,6 +3,60 @@ import os
 from nltk.tokenize import word_tokenize
 import string
 
+
+def main():
+    stopwordsList = createStopwordsList()
+
+    for filename in os.listdir("allData/"):
+        with open("allData/" + filename) as file:
+            currentLine = []
+            # Create output file
+            o = open("preprocessedData/" + filename, "w+")
+
+            file = file.read()
+            file = file.translate(str.maketrans('', '', string.punctuation))
+            tokens = word_tokenize(file)
+            tokens = removeStopWords(tokens, stopwordsList)
+
+            tokens = stemWords(tokens)
+
+            finalTokens = removeStopWords(tokens, stopwordsList)
+
+            for item in finalTokens:
+                item = item.lower()
+                o.write(item + " ")
+
+
+def removeStopWords(tokenList, stopWordDict):
+    newTokenList = []
+    for token in tokenList:
+        token = token.lower()
+        if token not in stopWordDict and token != "":
+            newTokenList.append(token)
+    return newTokenList
+
+
+def createStopwordsList():
+    """Function to create stopwords list."""
+    stopwordsList = {}
+    stopwordsFile = open('stopwords', 'r')
+    for word in stopwordsFile:
+        word = word.rstrip()
+        stopwordsList[word] = 1
+    return stopwordsList
+
+
+def stemWords(inputList):
+    """Function to stem the words using Porter Stemmer. Input is list of tokens, output is list of stemmed tokens."""
+
+    P = PorterStemmer()
+    outputList = []
+    for word in inputList:
+        stemmedWord = P.stem(word, 0, len(word) - 1)
+        outputList.append(stemmedWord)
+
+    return outputList
+
 """This file is used to tokenize, stem, and remove stopwords.
 It uses the Porter Stemmer, implemented and referenced below.
 It also includes functions for tokenization and stopword removal
@@ -412,60 +466,6 @@ class PorterStemmer:
         self.step4()
         self.step5()
         return self.b[self.k0:self.k + 1]
-
-
-def main():
-    stopwordsList = createStopwordsList()
-
-    for filename in os.listdir("allData/"):
-        with open("allData/" + filename) as file:
-            currentLine = []
-            # Create output file
-            o = open("preprocessedData/" + filename, "w+")
-
-            file = file.read()
-            file = file.translate(str.maketrans('', '', string.punctuation))
-            tokens = word_tokenize(file)
-            tokens = removeStopWords(tokens, stopwordsList)
-
-            tokens = stemWords(tokens)
-
-            finalTokens = removeStopWords(tokens, stopwordsList)
-
-            for item in finalTokens:
-                item = item.lower()
-                o.write(item + " ")
-
-
-def removeStopWords(tokenList, stopWordDict):
-    newTokenList = []
-    for token in tokenList:
-        token = token.lower()
-        if token not in stopWordDict and token != "":
-            newTokenList.append(token)
-    return newTokenList
-
-
-def createStopwordsList():
-    """Function to create stopwords list."""
-    stopwordsList = {}
-    stopwordsFile = open('stopwords', 'r')
-    for word in stopwordsFile:
-        word = word.rstrip()
-        stopwordsList[word] = 1
-    return stopwordsList
-
-
-def stemWords(inputList):
-    """Function to stem the words using Porter Stemmer. Input is list of tokens, output is list of stemmed tokens."""
-
-    P = PorterStemmer()
-    outputList = []
-    for word in inputList:
-        stemmedWord = P.stem(word, 0, len(word) - 1)
-        outputList.append(stemmedWord)
-
-    return outputList
 
 
 if __name__ == "__main__":
