@@ -36,10 +36,10 @@ def cosineSimilarty(vector1, vector2):
     for term in vector1:
         if term in vector2:
             numWeight += vector1[term]*vector2[term]
-        demLength1 = vector1[term]*vector1[term]
+        demLength1 += vector1[term]*vector1[term]
     demLength1 = math.sqrt(demLength1)
     for term in vector2:
-        demLength2 = vector2[term]*vector2[term]
+        demLength2 += vector2[term]*vector2[term]
     demLength2 = math.sqrt(demLength2)
     return (numWeight)/(demLength1*demLength2)
 
@@ -62,7 +62,7 @@ def main():
         #for each file in list
         for i in range(len(fileList)):
             #if file is not testFile append to training file list
-            if testFile != fileList[i]:
+            if i is not count:
                 trainList.append(fileList[i])
         #dictionary that stores term - document freq
         tdf = {}
@@ -71,6 +71,7 @@ def main():
         #list of dictionaries representing female document term weights
         femaleDocumentWeights = []
 
+        #for each training file, calculate its term weights as well update tdf
         for file in trainList:
             termFreq, maxFreq = indexDoc(open(file).read())
             for term in termFreq:
@@ -79,14 +80,17 @@ def main():
                     tdf[term] += 1.
                 else:
                     tdf[term] = 1.
+            #add male and female doc weights into separate lists
             if "female" in file:
                 femaleDocumentWeights.append(termFreq)
             else:
                 maleDocumentWeights.append(termFreq)
-
+        
+        #calculate final vectors for male and female given all male doc weights and female doc weights
         maleFinalVector = finalVector(tdf, maleDocumentWeights)
         femaleFinalVector = finalVector(tdf, femaleDocumentWeights)
 
+        #calculate term weights for test file and update tdf
         testFreq, maxFreq = indexDoc(testFile)
         for term in termFreq:
             termFreq[term] = termFreq[term]/maxFreq
@@ -95,14 +99,16 @@ def main():
             else:
                 tdf[term] = 1.
 
+        #calculate the final vector for test file
         testList = []
         testList.append(testFreq)
         testVector = finalVector(tdf, testList)
 
+        #calculate cosine similarity given male and female vector
         maleSim = cosineSimilarty(testVector, maleFinalVector)
         femaleSim = cosineSimilarty(testVector, femaleFinalVector)
-
         
+        #calculate total accuracy as well as categorical accuracy
         if femaleSim >= maleSim and "female" in testFile:
             accuracy += 1.
             female_acc += 1
@@ -113,8 +119,8 @@ def main():
 
 
         count += 1
-    print(accuracy/292)
-    print(str(female_acc) + " " + str(male_acc))
+    print("Accuracy: "  + str(accuracy/292))
+    print("Female accuracy: " + str(female_acc/146.) + " Male accuracy: " + str(male_acc/146.))
 
 
 
