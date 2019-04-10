@@ -40,9 +40,9 @@ A computer with python 3.7 and the following packages installed:
 * BeautifulSoup
 * Python 3 Virtual Environment (optional)
 
-<!--## License-->
-<!---->
-<!--This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details-->
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
