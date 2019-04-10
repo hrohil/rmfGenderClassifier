@@ -37,10 +37,10 @@ def cosineSimilarty(vector1, vector2):
         if term in vector2:
             numWeight += vector1[term]*vector2[term]
         demLength1 += vector1[term]*vector1[term]
-    demLength1 = math.sqrt(demLength1)
+    demLength1 += math.sqrt(demLength1)
     for term in vector2:
         demLength2 += vector2[term]*vector2[term]
-    demLength2 = math.sqrt(demLength2)
+    demLength2 += math.sqrt(demLength2)
     return (numWeight)/(demLength1*demLength2)
 
 def main():
