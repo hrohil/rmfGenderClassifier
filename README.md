@@ -5,26 +5,26 @@ This project looks to explore how the writing and wording of comments (with pron
  This project consists of the following programs and data files:
 ### Programs for acquiring data, processing, and classification ###
 * a webcrawler that crawls RMP pages for 21 universities and outputs to one file
-    * commentCrawler.py [https://github.com/hrohil/rmfGenderClassifier/tree/master/commentCrawler.py]
+    * [commentCrawler.py] (https://github.com/hrohil/rmfGenderClassifier/tree/master/commentCrawler.py)
 * a text-parser that converts the raw data file into data files of comments for individual professors
-    * parseDataIntoFiles.py [https://github.com/hrohil/rmfGenderClassifier/tree/master/parseDataIntoFiles.py]
+    * [parseDataIntoFiles.py] (https://github.com/hrohil/rmfGenderClassifier/tree/master/parseDataIntoFiles.py)
     * produces allData
 * a text processer that tokenizes, removes stopwords, and stems the files in allData and produces prerocessedData
-    * preprocessAllFiles.py [https://github.com/hrohil/rmfGenderClassifier/tree/master/preprocessAllFiles.py]
+    * [preprocessAllFiles.py] (https://github.com/hrohil/rmfGenderClassifier/tree/master/preprocessAllFiles.py)
 * a program used to predict the gender of professors using Naive Bayes. Uses the 'leave one out' strategy, and trains on the remaining preprocessed data files
-    * naiveBayes.py [https://github.com/hrohil/rmfGenderClassifier/tree/master/naiveBayes.py]
+    * [naiveBayes.py] (https://github.com/hrohil/rmfGenderClassifier/tree/master/naiveBayes.py)
     
 ### Data and Output Files ###
 * Data file containing all the raw text from commentCrawler.py
-    * commentCrawler.output [https://github.com/hrohil/rmfGenderClassifier/tree/master/commentCrawler.output]
+    * [commentCrawler.output] (https://github.com/hrohil/rmfGenderClassifier/tree/master/commentCrawler.output)
 * Folder of data files containing comments on each professor's RMP page parsed from parseDataIntoFiles.py without preprocessing
-    * allData [https://github.com/hrohil/rmfGenderClassifier/tree/master/allData]
+    * [allData] (https://github.com/hrohil/rmfGenderClassifier/tree/master/allData)
 * Folder of data files from allData that have been preprocessed by preprocessAllFiles.py
-    * preprocessedData [https://github.com/hrohil/rmfGenderClassifier/tree/master/preprocessedData]
+    * [preprocessedData] (https://github.com/hrohil/rmfGenderClassifier/tree/master/preprocessedData)
 * Folder of data files of additional male professors (removed to balance the number of male and female professors)
-    * extraMaleData [https://github.com/hrohil/rmfGenderClassifier/tree/master/extraMaleData]
+    * [extraMaleData] (https://github.com/hrohil/rmfGenderClassifier/tree/master/extraMaleData)
 * Results of classifications using Naive Bayes from preprocessedData
-    * naivebayes.output [https://github.com/hrohil/rmfGenderClassifier/tree/master/naivebayes.output]
+    * [naivebayes.output] (https://github.com/hrohil/rmfGenderClassifier/tree/master/naivebayes.output)
 
 
 ## Getting Started
