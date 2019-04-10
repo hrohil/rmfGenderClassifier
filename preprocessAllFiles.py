@@ -7,6 +7,8 @@ import string
 def main():
     stopwordsList = createStopwordsList()
 
+    num_words = 0
+
     for filename in os.listdir("allData/"):
         with open("allData/" + filename) as file:
             currentLine = []
@@ -25,6 +27,9 @@ def main():
             for item in finalTokens:
                 item = item.lower()
                 o.write(item + " ")
+                num_words += 1
+
+    print(num_words)
 
 
 def removeStopWords(tokenList, stopWordDict):
