@@ -1,6 +1,6 @@
 # Rate My Professor Gender Classifier 
 
-This project looks to explore how the writing and wording of comments (with pronouns removed) on ratemyprofessor.com (RMP) can be used to determine the professor's gender. The classification algorithms used are Naive Bayes, Rocchio Algorithm, and K-Nearest Neighbor
+This project looks to explore how the writing and wording of comments (with pronouns removed) on ratemyprofessor.com (RMP) can be used to determine the professor's gender. The classification algorithms used are Naive Bayes, Rocchio Algorithm, and K-Nearest Neighbor.
 
  This project consists of the following programs and data files:
 ### Programs for acquiring data, processing, and classification ###
