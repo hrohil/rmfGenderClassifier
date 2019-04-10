@@ -1,200 +1,200 @@
 Number of Neighbours:  1
-Accuracy:  0.8458904109589042
-Female Accuracy:  0.8767123287671232
-Male Accuracy:  0.815068493150685
+Accuracy:  0.6198630136986302
+Female Accuracy:  0.6712328767123288
+Male Accuracy:  0.5684931506849316
 Number of Neighbours:  3
-Accuracy:  0.8938356164383562
-Female Accuracy:  0.9383561643835616
-Male Accuracy:  0.8493150684931506
+Accuracy:  0.6095890410958904
+Female Accuracy:  0.6575342465753424
+Male Accuracy:  0.5616438356164384
 Number of Neighbours:  5
-Accuracy:  0.910958904109589
-Female Accuracy:  0.958904109589041
-Male Accuracy:  0.863013698630137
+Accuracy:  0.6198630136986302
+Female Accuracy:  0.7191780821917808
+Male Accuracy:  0.5205479452054794
 Number of Neighbours:  7
-Accuracy:  0.934931506849315
-Female Accuracy:  0.958904109589041
-Male Accuracy:  0.910958904109589
+Accuracy:  0.6164383561643836
+Female Accuracy:  0.6986301369863014
+Male Accuracy:  0.5342465753424658
 Number of Neighbours:  9
-Accuracy:  0.9315068493150684
-Female Accuracy:  0.958904109589041
-Male Accuracy:  0.9041095890410958
+Accuracy:  0.6061643835616438
+Female Accuracy:  0.7054794520547946
+Male Accuracy:  0.5068493150684932
 Number of Neighbours:  11
-Accuracy:  0.952054794520548
-Female Accuracy:  0.9657534246575342
-Male Accuracy:  0.9383561643835616
+Accuracy:  0.6164383561643836
+Female Accuracy:  0.726027397260274
+Male Accuracy:  0.5068493150684932
 Number of Neighbours:  13
-Accuracy:  0.9452054794520548
-Female Accuracy:  0.9657534246575342
-Male Accuracy:  0.9246575342465754
+Accuracy:  0.6164383561643836
+Female Accuracy:  0.7123287671232876
+Male Accuracy:  0.5205479452054794
 Number of Neighbours:  15
-Accuracy:  0.9486301369863014
-Female Accuracy:  0.9657534246575342
-Male Accuracy:  0.9315068493150684
+Accuracy:  0.6061643835616438
+Female Accuracy:  0.7191780821917808
+Male Accuracy:  0.4931506849315068
 Number of Neighbours:  17
-Accuracy:  0.9554794520547946
-Female Accuracy:  0.9657534246575342
-Male Accuracy:  0.9452054794520548
+Accuracy:  0.6438356164383562
+Female Accuracy:  0.773972602739726
+Male Accuracy:  0.5136986301369864
 Number of Neighbours:  19
-Accuracy:  0.9554794520547946
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9383561643835616
+Accuracy:  0.6438356164383562
+Female Accuracy:  0.7534246575342466
+Male Accuracy:  0.5342465753424658
 Number of Neighbours:  21
-Accuracy:  0.958904109589041
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9452054794520548
+Accuracy:  0.636986301369863
+Female Accuracy:  0.7671232876712328
+Male Accuracy:  0.5068493150684932
 Number of Neighbours:  23
-Accuracy:  0.958904109589041
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9452054794520548
+Accuracy:  0.6335616438356164
+Female Accuracy:  0.7808219178082192
+Male Accuracy:  0.4863013698630137
 Number of Neighbours:  25
-Accuracy:  0.958904109589041
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9452054794520548
+Accuracy:  0.6541095890410958
+Female Accuracy:  0.8013698630136986
+Male Accuracy:  0.5068493150684932
 Number of Neighbours:  27
-Accuracy:  0.9554794520547946
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9383561643835616
+Accuracy:  0.6506849315068494
+Female Accuracy:  0.821917808219178
+Male Accuracy:  0.4794520547945205
 Number of Neighbours:  29
-Accuracy:  0.9554794520547946
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9383561643835616
+Accuracy:  0.6643835616438356
+Female Accuracy:  0.8356164383561644
+Male Accuracy:  0.4931506849315068
 Number of Neighbours:  31
-Accuracy:  0.958904109589041
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9452054794520548
+Accuracy:  0.6678082191780822
+Female Accuracy:  0.8356164383561644
+Male Accuracy:  0.5
 Number of Neighbours:  33
-Accuracy:  0.9554794520547946
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9383561643835616
+Accuracy:  0.678082191780822
+Female Accuracy:  0.8356164383561644
+Male Accuracy:  0.5205479452054794
 Number of Neighbours:  35
-Accuracy:  0.9657534246575342
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.958904109589041
+Accuracy:  0.6678082191780822
+Female Accuracy:  0.8493150684931506
+Male Accuracy:  0.4863013698630137
 Number of Neighbours:  37
-Accuracy:  0.9657534246575342
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.958904109589041
+Accuracy:  0.6712328767123288
+Female Accuracy:  0.8561643835616438
+Male Accuracy:  0.4863013698630137
 Number of Neighbours:  39
-Accuracy:  0.9691780821917808
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9657534246575342
+Accuracy:  0.6712328767123288
+Female Accuracy:  0.8561643835616438
+Male Accuracy:  0.4863013698630137
 Number of Neighbours:  41
-Accuracy:  0.9726027397260274
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9726027397260274
+Accuracy:  0.660958904109589
+Female Accuracy:  0.8698630136986302
+Male Accuracy:  0.4520547945205479
 Number of Neighbours:  43
-Accuracy:  0.976027397260274
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9794520547945206
+Accuracy:  0.6678082191780822
+Female Accuracy:  0.8767123287671232
+Male Accuracy:  0.4589041095890411
 Number of Neighbours:  45
-Accuracy:  0.9828767123287672
-Female Accuracy:  0.9726027397260274
-Male Accuracy:  0.9931506849315068
+Accuracy:  0.6575342465753424
+Female Accuracy:  0.8698630136986302
+Male Accuracy:  0.4452054794520548
 Number of Neighbours:  47
-Accuracy:  0.9897260273972602
-Female Accuracy:  0.9794520547945206
-Male Accuracy:  1.0
+Accuracy:  0.6678082191780822
+Female Accuracy:  0.8972602739726028
+Male Accuracy:  0.4383561643835616
 Number of Neighbours:  49
-Accuracy:  0.9863013698630136
-Female Accuracy:  0.9794520547945206
-Male Accuracy:  0.9931506849315068
+Accuracy:  0.678082191780822
+Female Accuracy:  0.9041095890410958
+Male Accuracy:  0.4520547945205479
 Number of Neighbours:  51
-Accuracy:  0.9863013698630136
-Female Accuracy:  0.9794520547945206
-Male Accuracy:  0.9931506849315068
+Accuracy:  0.678082191780822
+Female Accuracy:  0.8904109589041096
+Male Accuracy:  0.4657534246575342
 Number of Neighbours:  53
-Accuracy:  0.9897260273972602
-Female Accuracy:  0.9794520547945206
-Male Accuracy:  1.0
+Accuracy:  0.684931506849315
+Female Accuracy:  0.9041095890410958
+Male Accuracy:  0.4657534246575342
 Number of Neighbours:  55
-Accuracy:  0.9897260273972602
-Female Accuracy:  0.9794520547945206
-Male Accuracy:  1.0
+Accuracy:  0.678082191780822
+Female Accuracy:  0.9041095890410958
+Male Accuracy:  0.4520547945205479
 Number of Neighbours:  57
-Accuracy:  0.9897260273972602
-Female Accuracy:  0.9794520547945206
-Male Accuracy:  1.0
+Accuracy:  0.684931506849315
+Female Accuracy:  0.910958904109589
+Male Accuracy:  0.4589041095890411
 Number of Neighbours:  59
-Accuracy:  0.9897260273972602
-Female Accuracy:  0.9794520547945206
-Male Accuracy:  1.0
+Accuracy:  0.684931506849315
+Female Accuracy:  0.9178082191780822
+Male Accuracy:  0.4520547945205479
 Number of Neighbours:  61
-Accuracy:  0.9897260273972602
-Female Accuracy:  0.9794520547945206
-Male Accuracy:  1.0
+Accuracy:  0.684931506849315
+Female Accuracy:  0.9041095890410958
+Male Accuracy:  0.4657534246575342
 Number of Neighbours:  63
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6815068493150684
+Female Accuracy:  0.910958904109589
+Male Accuracy:  0.4520547945205479
 Number of Neighbours:  65
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6815068493150684
+Female Accuracy:  0.9246575342465754
+Male Accuracy:  0.4383561643835616
 Number of Neighbours:  67
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6883561643835616
+Female Accuracy:  0.9383561643835616
+Male Accuracy:  0.4383561643835616
 Number of Neighbours:  69
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6815068493150684
+Female Accuracy:  0.9315068493150684
+Male Accuracy:  0.4315068493150685
 Number of Neighbours:  71
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6746575342465754
+Female Accuracy:  0.9383561643835616
+Male Accuracy:  0.410958904109589
 Number of Neighbours:  73
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.678082191780822
+Female Accuracy:  0.9383561643835616
+Male Accuracy:  0.4178082191780822
 Number of Neighbours:  75
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6678082191780822
+Female Accuracy:  0.9383561643835616
+Male Accuracy:  0.3972602739726027
 Number of Neighbours:  77
-Accuracy:  0.9965753424657534
-Female Accuracy:  0.9931506849315068
-Male Accuracy:  1.0
+Accuracy:  0.6815068493150684
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.4178082191780822
 Number of Neighbours:  79
-Accuracy:  0.9965753424657534
-Female Accuracy:  0.9931506849315068
-Male Accuracy:  1.0
+Accuracy:  0.6952054794520548
+Female Accuracy:  0.958904109589041
+Male Accuracy:  0.4315068493150685
 Number of Neighbours:  81
-Accuracy:  0.9965753424657534
-Female Accuracy:  0.9931506849315068
-Male Accuracy:  1.0
+Accuracy:  0.6746575342465754
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.4041095890410959
 Number of Neighbours:  83
-Accuracy:  0.9965753424657534
-Female Accuracy:  0.9931506849315068
-Male Accuracy:  1.0
+Accuracy:  0.684931506849315
+Female Accuracy:  0.952054794520548
+Male Accuracy:  0.4178082191780822
 Number of Neighbours:  85
-Accuracy:  0.9965753424657534
-Female Accuracy:  0.9931506849315068
-Male Accuracy:  1.0
+Accuracy:  0.6712328767123288
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.3972602739726027
 Number of Neighbours:  87
-Accuracy:  0.9965753424657534
-Female Accuracy:  0.9931506849315068
-Male Accuracy:  1.0
+Accuracy:  0.684931506849315
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.4246575342465753
 Number of Neighbours:  89
-Accuracy:  0.9965753424657534
-Female Accuracy:  0.9931506849315068
-Male Accuracy:  1.0
+Accuracy:  0.6815068493150684
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.4178082191780822
 Number of Neighbours:  91
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6712328767123288
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.3972602739726027
 Number of Neighbours:  93
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.678082191780822
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.410958904109589
 Number of Neighbours:  95
-Accuracy:  0.9965753424657534
-Female Accuracy:  0.9931506849315068
-Male Accuracy:  1.0
+Accuracy:  0.6678082191780822
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.3904109589041096
 Number of Neighbours:  97
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6712328767123288
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.3972602739726027
 Number of Neighbours:  99
-Accuracy:  0.9931506849315068
-Female Accuracy:  0.9863013698630136
-Male Accuracy:  1.0
+Accuracy:  0.6678082191780822
+Female Accuracy:  0.9452054794520548
+Male Accuracy:  0.3904109589041096
