@@ -11,6 +11,10 @@ def main():
     maleHighDic = {}
     femaleLowDic = {}
     femaleHighDic = {}
+    avgFemaleRating = 0.0
+    avgMaleRating = 0.0
+    totalFemales = 0
+    totalMales = 0
 
     for file in os.listdir("commentCrawlerOutput"):
         text = word_tokenize(open("commentCrawlerOutput/" +  file).read())
@@ -19,12 +23,17 @@ def main():
         for word in text:
             if len(wn.synsets(word)) > 0:
                 if 'a' is wn.synsets(word)[0].pos():
+                    rating = file[0:2]
                     if "F" in file:
-                        if(float(file[0:2]) <= 2.5):
+                        avgFemaleRating += float(rating)
+                        totalFemales += 1
+                        if(float(rating) <= 2.5):
                             append(word, femaleLowDic)
                         else:
                             append(word, femaleHighDic)
                     else:
+                        avgMaleRating += float(rating)
+                        totalMales += 1
                         if(float(file[0:2]) <= 2.5):
                             append(word, maleLowDic)
                         else:
@@ -37,6 +46,10 @@ def main():
     printDescendingDict(maleLowDic)
     print("\nHigh rated M\n")
     printDescendingDict(maleHighDic)
+    avgFemaleRating = avgFemaleRating / float(totalFemales)
+    avgMaleRating = avgMaleRating / float(totalMales)
+    print("\nAverage female rating " + str(avgFemaleRating))
+    print("\nAverage male rating " + str(avgMaleRating))
     
 def append(word, Dict):
     if word in Dict:
