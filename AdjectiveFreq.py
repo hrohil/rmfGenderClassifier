@@ -18,7 +18,7 @@ def main():
 
         for word in text:
             if len(wn.synsets(word)) > 0:
-                if 'a' is wn.synsets(word)[0].pos() or 'v' is wn.synsets(word)[0].pos():
+                if 'a' is wn.synsets(word)[0].pos():
                     if "F" in file:
                         if(float(file[0:2]) <= 2.5):
                             append(word, femaleLowDic)
