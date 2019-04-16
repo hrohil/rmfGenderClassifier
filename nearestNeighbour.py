@@ -2,7 +2,7 @@ import sys
 import os
 import math
 
-FOLDER = "preprocessedData/"
+FOLDER = "commentCrawlerOutputPreprocessed/"
 NUM_NEIGHBOURS = 99
 
 
@@ -139,14 +139,9 @@ def main():
         file_text = file.read()
         documents[filename] = file_text
 
-    for index in range(0, 146):
-        # Test files this round
-        male_filename = "male" + str(index) + ".txt"
-        female_filename = "female" + str(index) + ".txt"
-
+    for test_file in documents:
         train_list = filename_list.copy()
-        train_list.remove(male_filename)
-        train_list.remove(female_filename)
+        train_list.remove(test_file)
 
         inverted_index = InvertedIndex()
 
@@ -157,36 +152,29 @@ def main():
             inverted_index = indexDocument(
                 train_text, training_file, inverted_index)
 
-        male_text = documents[male_filename]
+        test_text = documents[test_file]
+        relevant_documents = retrieveDocuments(test_text, inverted_index)
+        predictions = getPredictions(relevant_documents, inverted_index)
 
-        relevant_documents = retrieveDocuments(male_text, inverted_index)
-
-        predictions = getPredictions(
-            relevant_documents, inverted_index)
-
-        for index, prediction in enumerate(predictions):
-            if prediction == "male":
-                male_correct[index] += 1
-                num_correct[index] += 1
-
-        female_text = documents[female_filename]
-
-        relevant_documents = retrieveDocuments(female_text, inverted_index)
-
-        predictions = getPredictions(
-            relevant_documents, inverted_index)
-
-        for index, prediction in enumerate(predictions):
-            if prediction == "female":
-                female_correct[index] += 1
-                num_correct[index] += 1
+        if "F" in test_file:
+            for index, prediction in enumerate(predictions):
+                if prediction == "female":
+                    female_correct[index] += 1
+                    num_correct[index] += 1
+        elif "M" in test_file:
+            for index, prediction in enumerate(predictions):
+                if prediction == "male":
+                    male_correct[index] += 1
+                    num_correct[index] += 1
+        else:
+            print("Filename error: ", test_file)
 
     for index, num_correct_value in enumerate(num_correct):
         num_neighbors = (index * 2) + 1
         print("Number of Neighbours: ", num_neighbors)
-        print("Accuracy: ", num_correct[index] / (146 * 2))
-        print("Female Accuracy: ", female_correct[index] / 146)
-        print("Male Accuracy: ", male_correct[index] / 146)
+        print("Accuracy: ", num_correct[index] / (207 * 2))
+        print("Female Accuracy: ", female_correct[index] / 207)
+        print("Male Accuracy: ", male_correct[index] / 207)
 
 
 def indexDocument(text, doc_id, inverted_index):
@@ -245,9 +233,9 @@ def getPredictions(relevant_documents, inverted_index):
         if count == NUM_NEIGHBOURS:
             break
 
-        if "female" in str(doc_id):
+        if "F" in str(doc_id):
             num_female += 1
-        elif "male" in str(doc_id):
+        elif "M" in str(doc_id):
             num_male += 1
         else:
             print("Invalid document name")
