@@ -7,11 +7,11 @@ def indexDoc(doc):
     #calulate term frequencies and keep a count on max_freq
     for token in doc:
         if token in termFreq:
-            termFreq[token] += 1.
+            termFreq[token] += 7.
             if maxFreq < termFreq[token]:
                 maxFreq = termFreq[token]
         else:
-            termFreq[token] = 1.
+            termFreq[token] = 7.
             if maxFreq < termFreq[token]:
                 maxFreq = termFreq[token]
 
