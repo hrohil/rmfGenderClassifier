@@ -21,8 +21,8 @@ def main():
     femaleRatings = []
     maleRatings = []
 
-    for file in os.listdir("commentCrawlerOutputPreprocessed"):
-        text = word_tokenize(open("commentCrawlerOutputPreprocessed/" +  file).read())
+    for file in os.listdir("preprocessedData"):
+        text = word_tokenize(open("preprocessedData/" +  file).read())
         text = removeStopWords(text, stopwordsList)
 
         for word in text:
