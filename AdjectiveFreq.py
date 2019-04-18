@@ -162,5 +162,10 @@ def write_ratings_to_CSV(male_arr, female_arr):
         for i in range(len(male_arr)):
             ratings_writer.writerow([male_arr[i], female_arr[i]])
 
+
+def write_weighted_ratings_to_CSV(male_dict, female_dict):
+    sorted_male_dict = sorted(male_dict, key=Dict.get, reverse=True)
+    sorted_female_dict = sorted(female_dict, key=Dict.get, reverse=True)
+
 if __name__ == "__main__":
     main()
