@@ -4,11 +4,13 @@ import math
 
 FOLDER = "commentCrawlerOutputPreprocessed/"
 NUM_NEIGHBOURS = 99
+# Can be COSINE or EUCLIDEAN
+SIMILARITY_TYPE = "COSINE"
 
 
 class InvertedIndex:
 
-    def __init__(self):
+    def __init__(self, normalize=False):
         self.total_documents = 0
         # term: document_frequency
         self.df = {}
@@ -18,6 +20,8 @@ class InvertedIndex:
         self.magnitude = {}
         # doc_id: max_frequency
         self.max_freq = {}
+        # Normalize TF
+        self.normalize = normalize
 
     def addData(self, doc_id, term):
         if doc_id not in self.tf:
@@ -120,6 +124,10 @@ class InvertedIndex:
             term_freq = self.tf[doc_id][term]
 
         idf = self.getInverseDocFreq(term)
+
+        if self.normalize:
+            term_freq = term_freq / self.max_freq[doc_id]
+
         return term_freq * idf
 
 
@@ -143,7 +151,7 @@ def main():
         train_list = filename_list.copy()
         train_list.remove(test_file)
 
-        inverted_index = InvertedIndex()
+        inverted_index = InvertedIndex(True)
 
         for training_file in train_list:
             train_text = ""
@@ -176,6 +184,24 @@ def main():
         print("Female Accuracy: ", female_correct[index] / 207)
         print("Male Accuracy: ", male_correct[index] / 207)
 
+    excel_file = open("nearestNeighbour.output.excel", 'w+')
+    excel_file.write("Number of Neighbours\n")
+    for index, num_correct_value in enumerate(num_correct):
+        num_neighbors = (index * 2) + 1
+        excel_file.write(str(num_neighbors) + '\n')
+
+    excel_file.write("Accuracy\n")
+    for index, num_correct_value in enumerate(num_correct):
+        excel_file.write(str(num_correct[index] / (207 * 2)) + '\n')
+
+    excel_file.write("Female Accuracy\n")
+    for index, num_correct_value in enumerate(num_correct):
+        excel_file.write(str(female_correct[index] / 207) + '\n')
+
+    excel_file.write("Male Accuracy\n")
+    for index, num_correct_value in enumerate(num_correct):
+        excel_file.write(str(male_correct[index] / 207) + '\n')
+
 
 def indexDocument(text, doc_id, inverted_index):
     for token in text.split():
@@ -198,14 +224,22 @@ def retrieveDocuments(query, inverted_index):
         doc_weight_vector = inverted_index.getWeightVector(
             query_tokens, doc_id)
 
-        dot_product = _getDotProduct(query_weight_vector, doc_weight_vector)
+        similarity_score = None
 
-        doc_magnitude = inverted_index.getMagnitude(doc_id)
+        if SIMILARITY_TYPE == "COSINE":
+            dot_product = _getDotProduct(
+                query_weight_vector, doc_weight_vector)
 
-        query_magnitude = math.sqrt(sum(i * i for i in query_weight_vector))
+            doc_magnitude = inverted_index.getMagnitude(doc_id)
 
-        similarity_score = dot_product / \
-            (float(doc_magnitude) * query_magnitude)
+            query_magnitude = math.sqrt(
+                sum(i * i for i in query_weight_vector))
+
+            similarity_score = dot_product / \
+                (float(doc_magnitude) * query_magnitude)
+        elif SIMILARITY_TYPE == "EUCLIDEAN":
+            similarity_score = _getEuclideanDistance(
+                query_weight_vector, doc_weight_vector)
 
         relevant_documents[doc_id] = similarity_score
 
@@ -243,6 +277,12 @@ def getPredictions(relevant_documents, inverted_index):
         count += 1
 
     return predictions
+
+
+def _getEuclideanDistance(a, b):
+    squared_sum = [(a - b) ** 2 for a, b in zip(a, b)]
+    dist = math.sqrt(sum(squared_sum))
+    return dist
 
 
 def _getDotProduct(a, b):
