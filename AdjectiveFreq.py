@@ -65,6 +65,8 @@ def main():
     femaleDict = normalizeDict(femaleDict)
     normFemaleHighDict = normalizeDict(femaleHighDic)
     normFemaleLowDict = normalizeDict(femaleLowDic)
+
+    # Make data from these dicts
     male_female_diff_dict = populateDifferenceDict(maleDict, femaleDict)
     female_male_diff_dict = populateDifferenceDict(femaleDict, maleDict)
     low_male_low_female_diff_dict = populateDifferenceDict(
