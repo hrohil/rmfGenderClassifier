@@ -60,15 +60,35 @@ def main():
                         maleRatings.append(rating)
 
     maleDict = normalizeDict(maleDict)
+    normMaleHighDict = normalizeDict(maleHighDic)
+    normMaleLowDict = normalizeDict(maleLowDic)
     femaleDict = normalizeDict(femaleDict)
+    normFemaleHighDict = normalizeDict(femaleHighDic)
+    normFemaleLowDict = normalizeDict(femaleLowDic)
     male_female_diff_dict = populateDifferenceDict(maleDict, femaleDict)
     female_male_diff_dict = populateDifferenceDict(femaleDict, maleDict)
+    low_male_low_female_diff_dict = populateDifferenceDict(
+        normMaleLowDict, normFemaleLowDict)
+    low_female_low_male_diff_dict = populateDifferenceDict(
+        normFemaleLowDict, normMaleLowDict)
+    high_male_high_female_diff_dict = populateDifferenceDict(
+        normMaleHighDict, normFemaleHighDict)
+    high_female_high_male_diff_dict = populateDifferenceDict(
+        normFemaleHighDict, normMaleHighDict)
 
     print('\n')
     print("Words used to describe males more than females\n")
-    printDescendingDict(male_female_diff_dict, 15)
+    printDescendingDict(male_female_diff_dict)
     print("\nWords used to describe females more than males\n")
-    printDescendingDict(female_male_diff_dict, 15)
+    printDescendingDict(female_male_diff_dict)
+    print("\nWords used to describe low rated females more than low rated males\n")
+    printDescendingDict(low_female_low_male_diff_dict)
+    print("\nWords used to describe low rated males more than low rated females\n")
+    printDescendingDict(low_male_low_female_diff_dict)
+    print("\nWords used to describe high rated females more than high rated males\n")
+    printDescendingDict(high_female_high_male_diff_dict)
+    print("\nWords used to describe high rated males more than high rated females\n")
+    printDescendingDict(high_male_high_female_diff_dict)
 
     print("\nLow rated F\n")
     printDescendingDict(femaleLowDic)
