@@ -66,9 +66,9 @@ def main():
 
     print('\n')
     print("Words used to describe males more than females\n")
-    printDescendingDict(male_female_diff_dict)
+    printDescendingDict(male_female_diff_dict, 15)
     print("\nWords used to describe females more than males\n")
-    printDescendingDict(female_male_diff_dict)
+    printDescendingDict(female_male_diff_dict, 15)
 
     print("\nLow rated F\n")
     printDescendingDict(femaleLowDic)
@@ -119,12 +119,12 @@ def append(word, Dict):
         Dict[word] = 1
 
 
-def printDescendingDict(Dict):
+def printDescendingDict(Dict, top=10):
     count = 0
     for item in sorted(Dict, key=Dict.get, reverse=True):
         print(str(item) + " " + str(Dict[item]))
         count += 1
-        if count is 10:
+        if count == top:
             return
 
 
