@@ -5,7 +5,30 @@ import math
 FOLDER = "commentCrawlerOutputPreprocessed/"
 NUM_NEIGHBOURS = 99
 # Can be COSINE or EUCLIDEAN
-SIMILARITY_TYPE = "COSINE"
+SIMILARITY_TYPE = "EUCLIDEAN"
+NORMALIZE = True
+BOOSTED_WORDS = {
+    # "just": 5,
+    # "sure": 5,
+    # "actual": 5,
+    # "easier": 5,
+    # "most": 5,
+    # "late": 5,
+    # "stronger": 5,
+    # "easiest": 5,
+    # "obvious": 5,
+    # "worthless": 5,
+    # "unclear": 5,
+    # "other": 5,
+    # "harder": 5,
+    # "useless": 5,
+    # "unfair": 5,
+    # "pointless": 5,
+    # "hot": 5,
+    # "similar": 5,
+    # "honest": 5,
+    # "big": 5
+}
 
 
 class InvertedIndex:
@@ -27,9 +50,13 @@ class InvertedIndex:
         if doc_id not in self.tf:
             self.tf[doc_id] = {}
 
+        term_value = 1
+        if term in BOOSTED_WORDS:
+            term_value = BOOSTED_WORDS[term]
+
         # Update term frequency of term
         if term not in self.tf[doc_id]:
-            self.tf[doc_id][term] = 1
+            self.tf[doc_id][term] = term_value
 
             # Update number of docs term appears in
             if term not in self.df:
@@ -37,7 +64,7 @@ class InvertedIndex:
             else:
                 self.df[term] += 1
         else:
-            self.tf[doc_id][term] += 1
+            self.tf[doc_id][term] += term_value
 
         # Update max frequency for each document
         if doc_id not in self.max_freq:
@@ -81,6 +108,12 @@ class InvertedIndex:
             else:
                 term_frequency_data[token] += 1
 
+        # Find max frequency
+        max_freq = 0
+        for term in term_frequency_data:
+            if term_frequency_data[term] > max_freq:
+                max_freq = term_frequency_data[term]
+
         for token in tokens:
             idf = self.getInverseDocFreq(token)
 
@@ -89,6 +122,9 @@ class InvertedIndex:
                 tf = 0
             else:
                 tf = term_frequency_data[token]
+
+            if self.normalize:
+                tf = tf / max_freq
 
             weight = tf * idf
             weights.append(weight)
@@ -151,7 +187,7 @@ def main():
         train_list = filename_list.copy()
         train_list.remove(test_file)
 
-        inverted_index = InvertedIndex(True)
+        inverted_index = InvertedIndex(NORMALIZE)
 
         for training_file in train_list:
             train_text = ""
@@ -240,6 +276,8 @@ def retrieveDocuments(query, inverted_index):
         elif SIMILARITY_TYPE == "EUCLIDEAN":
             similarity_score = _getEuclideanDistance(
                 query_weight_vector, doc_weight_vector)
+        else:
+            print("Invalid SIMILARITY_TYPE: ", SIMILARITY_TYPE)
 
         relevant_documents[doc_id] = similarity_score
 
@@ -247,8 +285,15 @@ def retrieveDocuments(query, inverted_index):
 
 
 def getPredictions(relevant_documents, inverted_index):
-    sorted_results = sorted(relevant_documents.items(),
-                            key=lambda kv: kv[1], reverse=True)
+    sorted_results = []
+    if SIMILARITY_TYPE == "EUCLIDEAN":
+        sorted_results = sorted(relevant_documents.items(),
+                                key=lambda kv: kv[1])
+    elif SIMILARITY_TYPE == "COSINE":
+        sorted_results = sorted(relevant_documents.items(),
+                                key=lambda kv: kv[1], reverse=True)
+    else:
+        print("Invalid SIMILARITY_TYPE: ", SIMILARITY_TYPE)
 
     predictions = []
 
