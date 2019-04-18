@@ -7,25 +7,26 @@ female = "female"
 male = "male"
 allFemaleFiles = []
 allMaleFiles = []
+femaleBoosterWords = ["unclear", "other", "harder", "useless", "unfair", "pointless", "hot", "similar", "honest", "big", "careless", "random", "slower", "sweetest", "faster"]
+maleBoosterWords = ["just", "sure", "actual", "easier", "late", "most", "stronger", "easiest", "obvious", "worthless", "sad", "incorrect", "smartest", "strong", "linear"]
+booster = 7
+
 
 def main():
 	filesFolder = sys.argv[1]
 	allFiles = {}
-	allFiles = createFileStructures(filesFolder)
+	allFiles, allFemaleFile, allMaleFile = createFileStructures(filesFolder)
 	accurateResult = 0
 	averageWordProbsFemale = {}
 	averageWordProbsMale= {}
 	o = open("naivebayes.output", "w")
 	# Run the training/testing on all female data files
 	counter = 0
-	for curTestFile in allFemaleFiles:
-		print(curTestFile)
-		print(len(allFemaleFiles))
+	for curTestFile in allFemaleFile:
 		curClassProbs = {}
 		curWordProbs = {}
 		curClassProbs, curWordProbs, totalUniqueVocab, femaleCounter, maleCounter = trainNaiveBayes(allFiles, curTestFile)
 		result = testNaiveBayes(allFiles, curTestFile, curClassProbs, curWordProbs, totalUniqueVocab, femaleCounter, maleCounter)
-		print(result)
 		#pdb.set_trace()
 		# Capture the word probability for each word to know top probabilities
 		for word in curWordProbs[0]:
@@ -44,7 +45,7 @@ def main():
 			accurateResult += 1
 	print("reach here")
 	# Run the training/testing on all male data files
-	for curTestFile in allMaleFiles:
+	for curTestFile in allMaleFile:
 		curClassProbs = {}
 		curWordProbs = {}
 		curClassProbs, curWordProbs, totalUniqueVocab, femaleCounter, maleCounter = trainNaiveBayes(allFiles, curTestFile)
@@ -67,16 +68,17 @@ def main():
 
 	#I have calculated the average top 10 words across all training sets
 	for word in averageWordProbsFemale:
-		averageWordProbsFemale[word] = float(averageWordProbsFemale[word]) / float(len(allFemaleFiles))
+		averageWordProbsFemale[word] = float(averageWordProbsFemale[word]) / float(len(allFemaleFile))
 	for word in averageWordProbsMale:
-		averageWordProbsMale[word] = float(averageWordProbsMale[word]) / float(len(allMaleFiles))
+		averageWordProbsMale[word] = float(averageWordProbsMale[word]) / float(len(allMaleFile))
 	
 	print("Female Class Top 10 Words")
 	find10TopWords(averageWordProbsFemale)
 	print("Male Class Top 10 Words")
 	find10TopWords(averageWordProbsMale)
 
-	accuracy = float(accurateResult) / float(len(allFemaleFiles) + len(allMaleFiles))
+	accuracy = float(accurateResult) / float(len(allFemaleFile) + len(allMaleFile))
+	print("Booster level: " + str(booster))
 	print("Accuracy: " + str(accuracy))
 
 
@@ -84,6 +86,7 @@ def main():
 def createFileStructures(folder):
 	"""Input name of folder. Output dictionary of all files' content."""
 	allFiles = {}
+
 	for filename in os.listdir(folder):
 		with open(os.path.join(folder, filename)) as content:
 			allFiles.update( {filename : content.read()} )
@@ -91,9 +94,18 @@ def createFileStructures(folder):
 				allFemaleFiles.append(filename)
 			else:
 				allMaleFiles.append(filename)
-			print("found file")
-		#print allFiles
-	return allFiles
+	allFemaleFiles.sort()
+	allMaleFiles.sort()
+
+	newFemaleFiles = ['']*103
+	newMalesFiles = ['']*103
+	for i in range(0, 103):
+		newFemaleFiles[i] = allFemaleFiles[i]
+		newMalesFiles[i] = allMaleFiles[i]
+
+
+	#pdb.set_trace()
+	return allFiles, newFemaleFiles, newMalesFiles
 
 
 def trainNaiveBayes(allFiles, omitFile):
@@ -102,11 +114,11 @@ def trainNaiveBayes(allFiles, omitFile):
 
 	# Create class probabilities depending on the file you're omitting
 	if 'F' in omitFile:
-		classProbabilities[female] = math.log(float(len(allFemaleFiles) - 1)/float(len(allFemaleFiles) + len(allMaleFiles)), 10)
-		classProbabilities[male] = math.log(float(len(allMaleFiles))/float(len(allFemaleFiles) + len(allMaleFiles)), 10)
+		classProbabilities[female] = math.log(float(len(allFemaleFiles)/2 - 1)/float(len(allFemaleFiles)/2 + len(allMaleFiles)/2), 10)
+		classProbabilities[male] = math.log(float(len(allMaleFiles)/2)/float(len(allFemaleFiles)/2 + len(allMaleFiles)/2), 10)
 	else:
-		classProbabilities[female] = math.log(float(len(allFemaleFiles))/float(len(allFemaleFiles) + len(allMaleFiles)), 10)
-		classProbabilities[male] = math.log(float(len(allMaleFiles) - 1)/float(len(allFemaleFiles) + len(allMaleFiles)), 10)
+		classProbabilities[female] = math.log(float(len(allFemaleFiles)/2)/float(len(allFemaleFiles)/2 + len(allMaleFiles)/2), 10)
+		classProbabilities[male] = math.log(float(len(allMaleFiles)/2 - 1)/float(len(allFemaleFiles)/2 + len(allMaleFiles)/2), 10)
 
 	print(len(allFemaleFiles))
 	print(len(allMaleFiles))
@@ -128,18 +140,30 @@ def trainNaiveBayes(allFiles, omitFile):
 				for word in currentContent.split():
 					femaleCounter += 1
 					if word in wordProbabilities[0]:
-						wordProbabilities[0][word] += 1
+						if word in femaleBoosterWords:
+							wordProbabilities[0][word] += booster
+						else:
+							wordProbabilities[0][word] += 1
 					else:
-						wordProbabilities[0][word] = 1
+						if word in femaleBoosterWords:
+							wordProbabilities[0][word] = booster
+						else:
+							wordProbabilities[0][word] = 1
 						if word not in wordProbabilities[1]:
 							totalUniqueVocab += 1
 			else:
 				for word in currentContent.split():
 					maleCounter += 1
 					if word in wordProbabilities[1]:
-						wordProbabilities[1][word] += 1
+						if word in maleBoosterWords:
+							wordProbabilities[1][word] += booster
+						else:
+							wordProbabilities[1][word] += 1
 					else:
-						wordProbabilities[1][word] = 1
+						if word in maleBoosterWords:
+							wordProbabilities[1][word] = booster
+						else:
+							wordProbabilities[1][word] = 1
 						if word not in wordProbabilities[0]:
 							totalUniqueVocab += 1
 
