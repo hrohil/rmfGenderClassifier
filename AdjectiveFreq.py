@@ -64,13 +64,13 @@ def main():
     male_female_diff_dict = populateDifferenceDict(maleDict, femaleDict)
     female_male_diff_dict = populateDifferenceDict(femaleDict, maleDict)
 
+    print('\n')
     print("Words used to describe males more than females\n")
     printDescendingDict(male_female_diff_dict)
-    print('\n')
-    print("Words used to describe females more than males\n")
+    print("\nWords used to describe females more than males\n")
     printDescendingDict(female_male_diff_dict)
 
-    print("Low rated F\n")
+    print("\nLow rated F\n")
     printDescendingDict(femaleLowDic)
     print("\nHigh rated F\n")
     printDescendingDict(femaleHighDic)
