@@ -108,15 +108,16 @@ def main():
 
 
 def normalizeDict(a):
+    new_dict = a.copy()
     max_freq = 0
-    for key, value in a.items():
+    for key, value in new_dict.items():
         if value > max_freq:
             max_freq = value
 
-    for key, value in a.items():
-        a[key] = value / max_freq
+    for key, value in new_dict.items():
+        new_dict[key] = value / max_freq
 
-    return a
+    return new_dict
 
 
 def populateDifferenceDict(a, b):
