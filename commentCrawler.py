@@ -15,15 +15,6 @@ def main():
 	os.chdir(os.getcwd() + "/commentCrawlerOutput")
 	print(os.getcwd())
 
-	# count number of reviews for male and female teachers
-	femaleReviews = 0
-	maleReviews = 0
-
-	exitedWithError = False
-	driver = webdriver.Chrome()
-
-	driver.set_page_load_timeout(30)
-
 	urlsByRegion = {}
 	urlsByRegion["west"] = ["http://www.ratemyprofessors.com/search.jsp?queryBy=schoolId&schoolName=Stanford+University&schoolID=953&queryoption=TEACHER",
 							"http://www.ratemyprofessors.com/search.jsp?queryBy=schoolId&schoolName=California+Institute+of+Technology&schoolID=148&queryoption=TEACHER",
@@ -109,13 +100,19 @@ def main():
 								"http://www.ratemyprofessors.com/search.jsp?queryBy=schoolId&schoolName=Michigan+State+University&schoolID=601&queryoption=TEACHER",
 								"http://www.ratemyprofessors.com/search.jsp?queryBy=schoolId&schoolName=Kalamazoo+College&schoolID=474&queryoption=TEACHER"]
 
+	# count number of reviews for male and female teachers
+	femaleReviews = 0
+	maleReviews = 0
 	
+	driver = webdriver.Chrome()
+	driver.set_page_load_timeout(30)
+
 	for region in urlsByRegion:							
 		for url in urlsByRegion[region]:
 			getTeacherNames(driver, url)
 		for teacherId in teacherIdsList:
 			teachers[teacherId]["region"] = region
-			# if page doesn't load in 30 seconds, close window and retry
+			# if page doesn't load in 30 seconds, close window and move on to next teacherId
 			if exitedWithError: 
 				driver = webdriver.Chrome()
 				driver.set_page_load_timeout(30)
@@ -130,7 +127,7 @@ def main():
 						maleReviews += len(teachers[teacherId]["comments"])
 
 			except Exception as e:
-				print(e)
+				print("Could not classify as male or female")
 			continue
 		teacherIdsList.clear()
 		
@@ -149,12 +146,12 @@ def main():
 
 	driver.close()
 
+
 def printData(teacherId, counter):
 		filename = str(teachers[teacherId]["rating"]) + str(teachers[teacherId]["gender"]) + str(counter)
 		outfile = open(filename, "w")
 		for comment in teachers[teacherId]["comments"]:
 			outfile.write(str(comment) + "\n")
-
 
 
 def getTeacherNames(driver, url):
@@ -178,7 +175,7 @@ def getTeacherNames(driver, url):
 		# get teacher ids and names
 		for li in divs:
 			li = str(li)
-			# find end index of teacher id, start index is 21
+			# Get teacher name
 			end = li.find('"', 21)
 			teacherId = li[21:end]
 			nameStart = li.find("name") + 6
