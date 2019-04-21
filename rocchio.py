@@ -7,11 +7,11 @@ def indexDoc(doc):
     #calulate term frequencies and keep a count on max_freq
     for token in doc:
         if token in termFreq:
-            termFreq[token] += 7.
+            termFreq[token] += 1.
             if maxFreq < termFreq[token]:
                 maxFreq = termFreq[token]
         else:
-            termFreq[token] = 7.
+            termFreq[token] = 1.
             if maxFreq < termFreq[token]:
                 maxFreq = termFreq[token]
 
@@ -24,9 +24,9 @@ def finalVector(tdf, docWeights):
         for word in doc:
             if word in tdf:
                 if word in finalVector:
-                    finalVector[word] += doc[word] * math.log(291./tdf[word])
+                    finalVector[word] += doc[word] * math.log(411./tdf[word])
                 else:
-                    finalVector[word] = doc[word] * math.log(291./tdf[word])
+                    finalVector[word] = doc[word] * math.log(411./tdf[word])
     return finalVector
 
 def cosineSimilarty(vector1, vector2):
@@ -46,15 +46,15 @@ def cosineSimilarty(vector1, vector2):
 def main():
     #get a list of files in dataset
     fileList = []
-    for file in os.listdir("preprocessedData"):
-        fileList.append("preprocessedData/" + file)
+    for file in os.listdir("commentCrawlerOutputPreprocessed"):
+        fileList.append("commentCrawlerOutputPreprocessed/" + file)
 
     accuracy = 0
     female_acc = 0
     male_acc = 0
     count = 0
-    #train and test over 292 files
-    while count < 292:
+    #train and test over 412 files
+    while count < 412:
         #test file
         testFile = fileList[count]
         #lists for training files
@@ -81,7 +81,7 @@ def main():
                 else:
                     tdf[term] = 1.
             #add male and female doc weights into separate lists
-            if "female" in file:
+            if "F" in file:
                 femaleDocumentWeights.append(termFreq)
             else:
                 maleDocumentWeights.append(termFreq)
@@ -109,18 +109,18 @@ def main():
         femaleSim = cosineSimilarty(testVector, femaleFinalVector)
         
         #calculate total accuracy as well as categorical accuracy
-        if femaleSim >= maleSim and "female" in testFile:
+        if femaleSim >= maleSim and "F" in testFile:
             accuracy += 1.
             female_acc += 1
-        if maleSim > femaleSim and "female" not in testFile: 
+        if maleSim > femaleSim and "M" in testFile: 
             accuracy += 1.
             male_acc += 1
 
 
 
         count += 1
-    print("Accuracy: "  + str(accuracy/292))
-    print("Female accuracy: " + str(female_acc/146.) + " Male accuracy: " + str(male_acc/146.))
+    print("Accuracy: "  + str(accuracy/412.))
+    print("Female accuracy: " + str(female_acc/206.) + " Male accuracy: " + str(male_acc/206.))
 
 
 
