@@ -3,10 +3,12 @@ import os
 import math
 
 FOLDER = "commentCrawlerOutputPreprocessed/"
+# Max number of neighbors to sample accuracies across
 NUM_NEIGHBOURS = 99
 # Can be COSINE or EUCLIDEAN
 SIMILARITY_TYPE = "EUCLIDEAN"
 NORMALIZE = True
+# Words to boost, unused because it does not change anything
 BOOSTED_WORDS = {
     # "just": 5,
     # "sure": 5,
@@ -32,6 +34,7 @@ BOOSTED_WORDS = {
 
 
 class InvertedIndex:
+    """Store data about the corpus and aid in calculations."""
 
     def __init__(self, normalize=False):
         self.total_documents = 0
@@ -183,6 +186,7 @@ def main():
         file_text = file.read()
         documents[filename] = file_text
 
+    # Leave one out cross validation strategy
     for test_file in documents:
         train_list = filename_list.copy()
         train_list.remove(test_file)
@@ -249,7 +253,6 @@ def indexDocument(text, doc_id, inverted_index):
 def retrieveDocuments(query, inverted_index):
     query_tokens = query.split()
 
-    # Ignore query_id as part of query tokens
     query_weight_vector = inverted_index.getQueryWeightVector(query_tokens)
 
     # Get set of documents that include at least one word from query
@@ -287,9 +290,11 @@ def retrieveDocuments(query, inverted_index):
 def getPredictions(relevant_documents, inverted_index):
     sorted_results = []
     if SIMILARITY_TYPE == "EUCLIDEAN":
+        # Closer is better
         sorted_results = sorted(relevant_documents.items(),
                                 key=lambda kv: kv[1])
     elif SIMILARITY_TYPE == "COSINE":
+        # Higher score is better
         sorted_results = sorted(relevant_documents.items(),
                                 key=lambda kv: kv[1], reverse=True)
     else:

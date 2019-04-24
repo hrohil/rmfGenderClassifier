@@ -1,3 +1,4 @@
+"""Preprocess data from the second iteration of the crawler."""
 import sys
 import os
 from nltk.tokenize import word_tokenize
@@ -34,6 +35,7 @@ def main():
             else:
                 print("Error in filename")
 
+    # Put all female files in the new folder
     for file in female_data:
         filename, tokens = file
 
@@ -66,6 +68,7 @@ def main():
 
         count += 1
 
+    # If there are less male files selected than female, top them up
     for index in range(0, len(male_data), int(len(male_data) / (len(male_data) - count))):
         if count == len(female_data):
             break
