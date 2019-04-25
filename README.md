@@ -13,6 +13,13 @@ This project looks to explore how the writing and wording of comments (with pron
     * [preprocessAllFiles.py](https://github.com/hrohil/rmfGenderClassifier/tree/master/preprocessAllFiles.py)
 * a program used to predict the gender of professors using Naive Bayes. Uses the 'leave one out' strategy, and trains on the remaining preprocessed data files
     * [naiveBayes.py](https://github.com/hrohil/rmfGenderClassifier/tree/master/naiveBayes.py)
+* a program used to predict the gender of professors using Rocchio. Uses the 'leave one out' strategy, and trains on the remaining preprocessed data files
+    * [rocchio.py](https://github.com/hrohil/rmfGenderClassifier/tree/master/rocchio.py)
+* a program used to extract top adjectives used by students to describe male and female professors
+    * [AdjectiveFreq.py](https://github.com/hrohil/rmfGenderClassifier/tree/master/AdjectiveFreq.py)
+* a program used to preprocess comment crawler data for new format, to include regional CS professors
+    * [preprocessCommentCrawler.py](https://github.com/hrohil/rmfGenderClassifier/tree/master/preprocessCommentCrawler.py)
+
     
 ### Data and Output Files ###
 * Data file containing all the raw text from commentCrawler.py
@@ -23,8 +30,23 @@ This project looks to explore how the writing and wording of comments (with pron
     * [preprocessedData](https://github.com/hrohil/rmfGenderClassifier/tree/master/preprocessedData)
 * Folder of data files of additional male professors (removed to balance the number of male and female professors)
     * [extraMaleData](https://github.com/hrohil/rmfGenderClassifier/tree/master/extraMaleData)
+* Folder of data files of data from CS professors across NESW regions before processing
+    * [commentCrawlerOutput](https://github.com/hrohil/rmfGenderClassifier/tree/master/commentCrawlerOutput)
+* Folder of data files of data from CS professors across NESW regions before processing
+    * [commentCrawlerOutputPreprocessed](https://github.com/hrohil/rmfGenderClassifier/tree/master/commentCrawlerOutputPreprocessed)
 * Results of classifications using Naive Bayes from preprocessedData
     * [naivebayes.output](https://github.com/hrohil/rmfGenderClassifier/tree/master/naivebayes.output)
+* Results of different words used for each professor group
+    * [difference_analysis](https://github.com/hrohil/rmfGenderClassifier/tree/master/difference_analysis)
+* Results of nearest neighbor after boosting word frequencies
+    * [nearestNeighbour.boosted.output](https://github.com/hrohil/rmfGenderClassifier/tree/master/nearestNeighbour.boosted.output)
+* Results of nearest neighbor after boosting word frequencies in Excel
+    * [nearestNeighbour.boosted.output.excel](https://github.com/hrohil/rmfGenderClassifier/tree/master/nearestNeighbour.boosted.output)
+* Results of nearest neighbor without boosting word frequencies in Excel (additional)
+    * [nearestNeighbour.output.excel](https://github.com/hrohil/rmfGenderClassifier/tree/master/nearestNeighbour.output.excel)
+* Results of professor ratings from CS departements across NESW regions (for two-sample t-test)
+    * [prof_ratings.csv](https://github.com/hrohil/rmfGenderClassifier/tree/master/prof_ratings.csv)
+
 
 
 ## Getting Started
